@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuGraph"
+    android:background="#FFF"
+    android:id="@+id/drawer_layout">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="#FFF"
+        android:layout_gravity="start"
+        android:theme="@style/navigationTheme"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu"/>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/icon_nav"
+                android:layout_centerVertical="true"
+                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:src="@drawable/icon_nav"/>
+
+        </RelativeLayout>
+
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipeRefreshLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="9dp"
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_marginTop="-2dp"
+                    android:progress="20"
+                    android:visibility="gone" />
+
+                <WebView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/myWebView"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:id="@+id/relativeLayout">
+
+                    <ImageView
+                        android:layout_width="240dp"
+                        android:layout_height="240dp"
+                        android:src="@drawable/no_connection"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/noConnectionLogo"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No Internet Connection"
+                        android:layout_below="@+id/noConnectionLogo"
+                        android:textAlignment="center"
+                        android:textSize="26sp"
+                        android:id="@+id/txtNoConnection"/>
+
+                    <Button
+                        android:layout_width="140dp"
+                        android:layout_height="55dp"
+                        android:text="Retry"
+                        android:background="@color/colorAccent"
+                        android:textColor="#ffffff"
+                        android:textSize="22sp"
+                        android:layout_below="@id/txtNoConnection"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/btnNoConnection"/>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

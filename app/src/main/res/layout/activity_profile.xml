@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Profile"
+    android:id="@+id/drawer_layout">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="#FFF"
+        android:layout_gravity="start"
+        android:theme="@style/navigationTheme"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/icon_nav"
+                android:layout_centerVertical="true"
+                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:src="@drawable/icon_nav"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PROFILE"
+            android:textColor="#E1EF3485"
+            android:textSize="50sp"
+            android:paddingTop="20dp"
+            android:textAlignment="center"
+            app:fontFamily="@font/bangers"/>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="50dp"
+            android:paddingLeft="20dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="Full Name"
+                android:id="@+id/full_name_profile"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingRight="10dp"
+                app:fontFamily="@font/amatic_sc_bold">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/profile_fullname"
+                    android:paddingRight="20dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="Username"
+                android:id="@+id/username_profile"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingRight="10dp"
+                app:fontFamily="@font/amatic_sc_bold">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/profile_username"
+                    android:paddingRight="20dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="Password"
+                android:id="@+id/password_profile"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingRight="10dp"
+                app:fontFamily="@font/amatic_sc_bold">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/profile_password"
+                    android:paddingRight="20dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="Email"
+                android:id="@+id/email_profile"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingRight="10dp"
+                app:fontFamily="@font/amatic_sc_bold">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/profile_email"
+                    android:paddingRight="20dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="Phone Number "
+                android:id="@+id/phone_profile"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingRight="10dp"
+                app:fontFamily="@font/amatic_sc_bold">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/profile_phone"
+                    android:paddingRight="20dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/update_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:background="#000"
+                android:onClick="update"
+                android:text="UPDATE PROFILE"
+                android:textColor="#fff"
+                app:backgroundTint="#A9E91E63" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

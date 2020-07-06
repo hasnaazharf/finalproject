@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "392735092689",
+    "firebase_url": "https://hasna-smarthome.firebaseio.com",
+    "project_id": "hasna-smarthome",
+    "storage_bucket": "hasna-smarthome.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392735092689:android:2a9614d1009c70c740faf0",
+        "android_client_info": {
+          "package_name": "com.example.hasnasmarthome"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392735092689-2qvri75464skqvt8p2imviuhf9s8o88i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hasnasmarthome",
+            "certificate_hash": "88545c2e3a1dd70fb5a5a4763976a25e1b59ad1e"
+          }
+        },
+        {
+          "client_id": "392735092689-t3a9f7p0gs9fpl7nvpqfi2jkqmn1u67e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSLXt6-m4Ms9SYvJloFPTTQheRAy8AdSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392735092689-t3a9f7p0gs9fpl7nvpqfi2jkqmn1u67e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
