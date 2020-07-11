@@ -14,8 +14,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -29,7 +32,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
-    String fullnameFromDB, usernameFromDB, passwordFromDB, phoneNoFromDB, emailFromDB;
+    String username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 openMenuEnergy();
             }
         });
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
 
     }
 
@@ -162,12 +169,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         startActivity(intent);
     }
     public void openProfile (){
-        Intent intent = new Intent(getApplicationContext(), Profile.class);
-        intent.putExtra("name", fullnameFromDB);
-        intent.putExtra("username", usernameFromDB);
-        intent.putExtra("password", passwordFromDB);
-        intent.putExtra("phoneNo", phoneNoFromDB);
-        intent.putExtra("email", emailFromDB);
+        Intent intent = new Intent(this, Profile.class);
+        intent.putExtra("username",username);
+        intent.putExtra("password",password);
         startActivity(intent);
     }
     public void openLogin () {

@@ -60,12 +60,6 @@ public class Login extends AppCompatActivity {
         Intent intent= new Intent(this, SignUp.class);
         startActivity(intent);
     }
-    public void openLoginScreen (){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
-    }
 
     private Boolean validateUsername() {
         String val = username.getEditText().getText().toString();
