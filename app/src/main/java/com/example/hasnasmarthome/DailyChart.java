@@ -1,17 +1,14 @@
 package com.example.hasnasmarthome;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,18 +17,16 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MenuStatus extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DailyChart extends Fragment{
 
     WebView webView;
-    private String webUrl = "https://energy-monitoring-6c8ab.web.app/";
+    private String webUrl = "https://energy-monitoring-6c8ab.web.app/daily_graph.html";
     ProgressBar progressBarWeb;
     ProgressDialog progressDialog;
     RelativeLayout relativeLayout;
@@ -42,28 +37,51 @@ public class MenuStatus extends AppCompatActivity implements NavigationView.OnNa
     DrawerLayout drawerlayout;
     ImageView menu_nav;
 
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public DailyChart() {
+        // Required empty public constructor
+    }
+
+    // TODO: Rename and change types and number of parameters
+    public static DailyChart newInstance(String param1, String param2) {
+        DailyChart fragment = new DailyChart();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_menu_status);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
-        //Menu Hooks
-        drawerlayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
-        menu_nav = findViewById(R.id.icon_nav);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_daily_chart, container, false);
 
-        navigationDrawer();
-
-        webView = (WebView) findViewById(R.id.myWebView);
-        progressBarWeb = (ProgressBar) findViewById(R.id.progressBar);
-        progressDialog = new ProgressDialog(this);
+        webView = (WebView) view.findViewById(R.id.myWebView);
+        progressBarWeb = (ProgressBar) view.findViewById(R.id.progressBar);
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading Please Wait");
 
-        btnNoInternetConnection = (Button) findViewById(R.id.btnNoConnection);
-        relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        btnNoInternetConnection = (Button) view.findViewById(R.id.btnNoConnection);
+        relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE,Color.YELLOW,Color.GREEN);
 
@@ -124,12 +142,12 @@ public class MenuStatus extends AppCompatActivity implements NavigationView.OnNa
 
                 progressBarWeb.setVisibility(View.VISIBLE);
                 progressBarWeb.setProgress(newProgress);
-                setTitle("Loading...");
+                progressDialog.setTitle("Loading");
                 progressDialog.show();
                 if(newProgress ==100){
 
                     progressBarWeb.setVisibility(View.GONE);
-                    setTitle(view.getTitle());
+                    progressDialog.setTitle(view.getTitle());
                     progressDialog.dismiss();
 
                 }
@@ -145,14 +163,14 @@ public class MenuStatus extends AppCompatActivity implements NavigationView.OnNa
                 checkConnection();
             }
         });
-
-
+        // Inflate the layout for this fragment
+        return view;
     }
 
     public void checkConnection(){
 
         ConnectivityManager connectivityManager = (ConnectivityManager)
-                this.getSystemService(Context.CONNECTIVITY_SERVICE);
+                this.getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
         NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         NetworkInfo mobileNetwork = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
@@ -177,93 +195,4 @@ public class MenuStatus extends AppCompatActivity implements NavigationView.OnNa
         }
     }
 
-    //Navigation Item
-
-    private void navigationDrawer() {
-        navigationView.bringToFront();
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_home);
-
-        menu_nav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(drawerlayout.isDrawerVisible(GravityCompat.START))
-                    drawerlayout.closeDrawer(GravityCompat.START);
-                else drawerlayout.openDrawer(GravityCompat.START);
-            }
-        });
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.nav_home:
-                openHome();
-                break;
-
-            case R.id.nav_status:
-                openMenuStatus();
-                break;
-
-            case R.id.nav_chart:
-                openMenuChart();
-                break;
-
-            case R.id.nav_control:
-                openMenuControl();
-                break;
-
-            case R.id.nav_energy:
-                openMenuEnergy();
-                break;
-
-            case R.id.nav_profile:
-                openProfile();
-                break;
-
-            case R.id.nav_logout:
-                openLogin();
-                break;
-        }
-
-        drawerlayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    @Override
-    public void onBackPressed(){
-        if(drawerlayout.isDrawerVisible(GravityCompat.START)){
-            drawerlayout.closeDrawer(GravityCompat.START);
-        }else
-            super.onBackPressed();
-    }
-
-    public void openHome (){
-        Intent intent= new Intent(this, Dashboard.class);
-        startActivity(intent);
-    }
-    public void openMenuStatus (){
-        Intent intent= new Intent(this, MenuStatus.class);
-        startActivity(intent);
-    }
-    public void openMenuChart (){
-        Intent intent= new Intent(this, MenuChart.class);
-        startActivity(intent);
-    }
-    public void openMenuControl (){
-        Intent intent= new Intent(this, MenuControl.class);
-        startActivity(intent);
-    }
-    public void openMenuEnergy (){
-        Intent intent= new Intent(this, MenuEnergy.class);
-        startActivity(intent);
-    }
-    public void openProfile (){
-        Intent intent= new Intent(this, Profile.class);
-        startActivity(intent);
-    }
-    public void openLogin () {
-        Intent intent= new Intent(this, Login.class);
-        startActivity(intent);
-    }
 }

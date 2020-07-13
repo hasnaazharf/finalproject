@@ -14,11 +14,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -27,7 +24,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     DrawerLayout drawerlayout;
     ImageView menu_nav;
 
-    Button callStatus, callGraph, callControl, callEnergy;
+    Button callStatus, callChart, callControl, callEnergy;
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
@@ -58,11 +55,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        callGraph = (Button) findViewById(R.id.graph_button);
-        callGraph.setOnClickListener(new View.OnClickListener() {
+        callChart = (Button) findViewById(R.id.chart_button);
+        callChart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMenuGraph();
+                openMenuChart();
             }
         });
 
@@ -115,8 +112,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 openMenuStatus();
                 break;
 
-            case R.id.nav_graph:
-                openMenuGraph();
+            case R.id.nav_chart:
+                openMenuChart();
                 break;
 
             case R.id.nav_control:
@@ -156,8 +153,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         Intent intent= new Intent(this, MenuStatus.class);
         startActivity(intent);
     }
-    public void openMenuGraph (){
-        Intent intent= new Intent(this, MenuGraph.class);
+    public void openMenuChart (){
+        Intent intent= new Intent(this, MenuChart.class);
         startActivity(intent);
     }
     public void openMenuControl (){

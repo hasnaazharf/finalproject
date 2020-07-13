@@ -135,26 +135,26 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/graph_image"
+                                android:id="@+id/chart_image"
                                 android:layout_width="match_parent"
                                 android:layout_height="99dp"
                                 android:layout_marginTop="15dp"
-                                app:srcCompat="@drawable/graph" />
+                                app:srcCompat="@drawable/chart" />
 
                             <TextView
-                                android:id="@+id/graph_text"
+                                android:id="@+id/chart_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="125dp"
                                 android:layout_marginBottom="15dp"
-                                android:text="Graph"
+                                android:text="Chart"
                                 android:textAlignment="center"
                                 android:textSize="24sp"
                                 app:fontFamily="@font/amatic_sc_bold"
-                                app:layout_constraintTop_toBottomOf="@+id/graph_image"/>
+                                app:layout_constraintTop_toBottomOf="@+id/chart_image"/>
 
                             <Button
-                                android:id="@+id/graph_button"
+                                android:id="@+id/chart_button"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:backgroundTint="@color/colorSecondary"/>

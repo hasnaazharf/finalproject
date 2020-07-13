@@ -14,8 +14,8 @@
             android:title="Status" />
 
         <item
-            android:id="@+id/nav_graph"
-            android:icon="@drawable/icon_graph"
+            android:id="@+id/nav_chart"
+            android:icon="@drawable/icon_chart"
             android:title="Graph" />
 
         <item

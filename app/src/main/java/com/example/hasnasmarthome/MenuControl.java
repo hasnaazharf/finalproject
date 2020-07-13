@@ -123,8 +123,8 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
                 openMenuStatus();
                 break;
 
-            case R.id.nav_graph:
-                openMenuGraph();
+            case R.id.nav_chart:
+                openMenuChart();
                 break;
 
             case R.id.nav_control:
@@ -163,8 +163,8 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
         Intent intent= new Intent(this, MenuStatus.class);
         startActivity(intent);
     }
-    public void openMenuGraph (){
-        Intent intent= new Intent(this, MenuGraph.class);
+    public void openMenuChart (){
+        Intent intent= new Intent(this, MenuChart.class);
         startActivity(intent);
     }
     public void openMenuControl (){

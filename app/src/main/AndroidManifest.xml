@@ -12,9 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".MenuChart"
+            android:label="@string/title_activity_menu_chart"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
         <activity android:name=".HttpGetRequest" />
         <activity android:name=".MenuEnergy" />
-        <activity android:name=".MenuGraph" />
         <activity android:name=".MenuControl" />
         <activity android:name=".MenuStatus" />
         <activity android:name=".Profile" />

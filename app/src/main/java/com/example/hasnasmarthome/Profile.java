@@ -2,7 +2,6 @@ package com.example.hasnasmarthome;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,10 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import com.google.firebase.database.Query;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -125,14 +122,23 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
+                openHome();
                 break;
 
-            case R.id.nav_graph:
-                openMenuGraph();
+            case R.id.nav_status:
+                openMenuStatus();
+                break;
+
+            case R.id.nav_chart:
+                openMenuChart();
                 break;
 
             case R.id.nav_control:
                 openMenuControl();
+                break;
+
+            case R.id.nav_energy:
+                openMenuEnergy();
                 break;
 
             case R.id.nav_profile:
@@ -156,12 +162,17 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             super.onBackPressed();
     }
 
-    public void openMenuStatus (){
-        Intent intent= new Intent(this, MenuGraph.class);
+    public void openHome (){
+        Intent intent= new Intent(this, Dashboard.class);
         startActivity(intent);
     }
-    public void openMenuGraph (){
-        Intent intent= new Intent(this, MenuGraph.class);
+
+    public void openMenuStatus (){
+        Intent intent= new Intent(this, MenuStatus.class);
+        startActivity(intent);
+    }
+    public void openMenuChart (){
+        Intent intent= new Intent(this, MenuChart.class);
         startActivity(intent);
     }
     public void openMenuControl (){
@@ -169,7 +180,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         startActivity(intent);
     }
     public void openMenuEnergy (){
-        Intent intent= new Intent(this, MenuGraph.class);
+        Intent intent= new Intent(this, MenuEnergy.class);
         startActivity(intent);
     }
     public void openProfile (){
