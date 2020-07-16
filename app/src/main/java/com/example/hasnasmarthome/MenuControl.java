@@ -1,13 +1,18 @@
 package com.example.hasnasmarthome;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,16 +22,33 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mcsoft.timerangepickerdialog.RangeTimePickerDialog;
 
 
-public class MenuControl extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MenuControl extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RangeTimePickerDialog.ISelectedTime{
 
     Switch swAutoMode, swManualMode;
-    Switch lampAuto, lampManual;
+    Switch lampManual;
 
     NavigationView navigationView;
     DrawerLayout drawerlayout;
     ImageView menu_nav;
+
+    Button button;
+    TextView timeON, timeOFF;
+
+    final class selectedTime
+    {
+        public int hourStart, minuteStart, hourEnd, minuteEnd;
+
+        public selectedTime(int hourStart, int minuteStart, int hourEnd, int minuteEnd) {
+            this.hourStart = hourStart;
+            this.minuteStart = minuteStart;
+            this.hourEnd = hourEnd;
+            this.minuteEnd = minuteEnd;
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +60,18 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
         drawerlayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         menu_nav = findViewById(R.id.icon_nav);
+        timeON = (TextView) findViewById(R.id.textViewON);
+        timeOFF = (TextView) findViewById(R.id.textViewOFF);
+        button = (Button) findViewById(R.id.buttonLamp1);
+
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                showCustomDialogTimePicker();
+            }
+        });
 
         navigationDrawer();
 
@@ -48,14 +82,22 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myref = database.getReference("Mode/Auto_Mode");
-                    myref.setValue("1");
+                    DatabaseReference auto = database.getReference("Mode/Auto_Mode");
+                    auto.setValue("ON");
+                    DatabaseReference manual = database.getReference("Mode/Manual_Mode");
+                    manual.setValue("OFF");
+
                     swManualMode.setChecked(false);
                     lampManual.setChecked(false);
+                    timeON.setEnabled(true);
+                    timeOFF.setEnabled(true);
+                    button.setEnabled(true);
                 } else {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myref = database.getReference("Mode/Auto_Mode");
-                    myref.setValue("0");
+                    DatabaseReference auto = database.getReference("Mode/Auto_Mode");
+                    auto.setValue("OFF");
+                    DatabaseReference manual = database.getReference("Mode/Manual_Mode");
+                    manual.setValue("ON");
                 }
             }
         });
@@ -68,13 +110,20 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myref = database.getReference("Mode/Manual_Mode");
-                    myref.setValue("1");
+                    DatabaseReference manual = database.getReference("Mode/Manual_Mode");
+                    manual.setValue("ON");
+                    DatabaseReference auto = database.getReference("Mode/Auto_Mode");
+                    auto.setValue("OFF");
                     swAutoMode.setChecked(false);
+                    timeON.setEnabled(false);
+                    timeOFF.setEnabled(false);
+                    button.setEnabled(false);
                 } else {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myref = database.getReference("Mode/Manual_Mode");
-                    myref.setValue("0");
+                    DatabaseReference manual = database.getReference("Mode/Manual_Mode");
+                    manual.setValue("OFF");
+                    DatabaseReference auto = database.getReference("Mode/Auto_Mode");
+                    auto.setValue("ON");
                 }
             }
         });
@@ -93,6 +142,68 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
                 }
             }
         });
+    }
+
+    public void showCustomDialogTimePicker()
+    {
+        // Create an instance of the dialog fragment and show it
+        RangeTimePickerDialog dialog = new RangeTimePickerDialog();
+        dialog.newInstance();
+        dialog.setIs24HourView(true);
+        dialog.setRadiusDialog(20);
+        dialog.setTextTabStart("Start");
+        dialog.setTextTabEnd("End");
+        dialog.setTextBtnPositive("Accept");
+        dialog.setTextBtnNegative("Close");
+        dialog.setValidateRange(false);
+        dialog.setColorBackgroundHeader(R.color.pink);
+        dialog.setColorBackgroundTimePickerHeader(R.color.pink);
+        dialog.setColorTextButton(R.color.white);
+        FragmentManager fragmentManager = getFragmentManager();
+        dialog.show(fragmentManager, "");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings)
+        {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSelectedTime(int hourStart, int minuteStart, int hourEnd, int minuteEnd)
+    {
+        selectedTime selectTime = new selectedTime(hourStart, minuteStart, hourEnd, minuteEnd);
+        Intent intent = getIntent();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Auto_Time");
+        ref.setValue(selectTime);
+
+        timeON.setText(new StringBuilder().append(selectTime.hourStart).append(" : ").append(selectTime.minuteStart)
+                .append(" "));
+        timeOFF.setText(new StringBuilder().append(selectTime.hourEnd).append(" : ").append(selectTime.minuteEnd)
+                .append(" "));
+
+
+        Toast.makeText(this, "Start Time : "+hourStart+":"+minuteStart+"\nEnd Time: "+hourEnd+":"+minuteEnd, Toast.LENGTH_SHORT).show();
     }
 
     //Navigation Item
@@ -128,6 +239,7 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
                 break;
 
             case R.id.nav_control:
+                openMenuControl();
                 break;
 
             case R.id.nav_energy:

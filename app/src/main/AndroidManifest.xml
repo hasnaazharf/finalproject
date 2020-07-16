@@ -15,7 +15,7 @@
         <activity
             android:name=".MenuChart"
             android:label="@string/title_activity_menu_chart"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity android:name=".HttpGetRequest" />
         <activity android:name=".MenuEnergy" />
         <activity android:name=".MenuControl" />

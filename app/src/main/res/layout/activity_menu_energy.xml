@@ -1,9 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ly_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="100dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    app:cardCornerRadius="50dp"
     tools:context=".MenuEnergy">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#A9E91E63"
+            app:tabMode="fixed">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabStartTime"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:icon="@drawable/ic_start_time_black_24dp"
+                android:text="Start time" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabEndTime"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:icon="@drawable/ic_end_time_black_24dp"
+                android:text="End time" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/view_pager"
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:gravity="center"
+            android:layout_below="@id/tabLayout">
+
+            <TimePicker
+                android:id="@+id/timePickerStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:headerBackground="#A9E91E63"
+                android:numbersSelectorColor="#A9E91E63"
+                android:visibility="visible">
+
+            </TimePicker>
+
+            <TimePicker
+                android:id="@+id/timePickerEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:headerBackground="#E1EF3485"
+                android:numbersSelectorColor="#E1EF3485"
+                android:visibility="gone">
+            </TimePicker>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/timePickerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/view_pager">
+
+            <Button
+                android:id="@+id/btnOK"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Ok"
+                android:textColor="#FFF"
+                android:background="#000"
+                app:backgroundTint="#A9E91E63"/>
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Cancel"
+                android:textColor="#FFF"
+                android:background="#000"
+                app:backgroundTint="#A9E91E63"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/textON"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/timePickerButton"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/advent_pro_semibold"
+                android:text="ON TIME : "
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/textViewON"
+                android:layout_width="118dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/advent_pro_semibold"
+                android:text="ON TIME"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/textON">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/advent_pro_semibold"
+                android:text="OFF TIME : "
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/textViewOFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/advent_pro_semibold"
+                android:text="OFF TIME"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

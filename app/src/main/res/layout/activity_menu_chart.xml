@@ -9,13 +9,13 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#A9E91E63">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="96dp"
-            android:background="#E1EF3485"/>
+            android:layout_height="96dp"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
@@ -26,14 +26,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DAILY CHART"
-                android:textColor="#E1EF3485"
+                android:textColor="#A9E91E63"
                 android:icon="@drawable/icon_chart"/>
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MONTHLY CHART"
-                android:textColor="#E1EF3485"
+                android:textColor="#A9E91E63"
                 android:icon="@drawable/icon_chart"/>
 
         </com.google.android.material.tabs.TabLayout>

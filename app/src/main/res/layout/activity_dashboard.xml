@@ -60,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="HASNA'S SMARTHOME"
-                    android:textColor="#E1EF3485"
+                    android:textColor="#A9E91E63"
                     android:textAlignment="center"
                     android:textSize="50sp"
                     app:fontFamily="@font/bangers" />
