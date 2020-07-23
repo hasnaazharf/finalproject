@@ -142,7 +142,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 break;
 
             case R.id.nav_profile:
-                openProfile();
                 break;
 
             case R.id.nav_logout:
@@ -181,10 +180,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
     public void openMenuEnergy (){
         Intent intent= new Intent(this, MenuEnergy.class);
-        startActivity(intent);
-    }
-    public void openProfile (){
-        Intent intent= new Intent(this, Profile.class);
         startActivity(intent);
     }
     public void openLogin () {

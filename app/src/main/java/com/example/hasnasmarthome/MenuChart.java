@@ -7,7 +7,6 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -19,13 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuChart extends AppCompatActivity {
-
-    private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
     private DailyChart dailyChart;
     private MonthlyChart monthlyChart;
+
+    private int[] tabIcons = {
+            R.drawable.icon_chart,
+            R.drawable.icon_chart
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,6 @@ public class MenuChart extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_menu_chart);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
 
@@ -44,14 +43,18 @@ public class MenuChart extends AppCompatActivity {
         monthlyChart = new MonthlyChart();
 
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.icon_chart);
-        tabLayout.getTabAt(1).setIcon(R.drawable.icon_chart);
+        setupTabIcons();
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(dailyChart, "Daily Chart");
         viewPagerAdapter.addFragment(monthlyChart, "Monthly Chart");
         viewPager.setAdapter(viewPagerAdapter);
 
+    }
+
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {

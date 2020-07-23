@@ -38,6 +38,39 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                app:srcCompat="@drawable/status_update" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MENU STATUS"
+                android:textColor="#A9E91E63"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                android:paddingTop="130dp"
+                app:fontFamily="@font/bangers"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Monitoring and Controlling Your Lamp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:fontFamily="@font/amatic_sc_bold"
+                android:paddingTop="190dp"
+                android:layout_marginBottom="20dp"/>
+
+        </RelativeLayout>
+
 
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

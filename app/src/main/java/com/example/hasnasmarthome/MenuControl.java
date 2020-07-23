@@ -37,6 +37,11 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
     Button button;
     TextView timeON, timeOFF;
 
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
+
+    String username, password;
+
     final class selectedTime
     {
         public int hourStart, minuteStart, hourEnd, minuteEnd;
@@ -56,6 +61,9 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_menu_control);
 
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("users");
+
         //Menu Hooks
         drawerlayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
@@ -74,6 +82,10 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
         });
 
         navigationDrawer();
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
 
         //Auto Mode
         swAutoMode = (Switch) findViewById(R.id.switch_AutoMode);
@@ -133,11 +145,11 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myref = database.getReference("Manual_Lamp_Status");
+                    DatabaseReference myref = database.getReference("Mode/Manual_Lamp_Status");
                     myref.setValue("ON");
                 } else {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myref = database.getReference("Manual_Lamp_Status");
+                    DatabaseReference myref = database.getReference("Mode/Manual_Lamp_Status");
                     myref.setValue("OFF");
                 }
             }
@@ -194,7 +206,7 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
         selectedTime selectTime = new selectedTime(hourStart, minuteStart, hourEnd, minuteEnd);
         Intent intent = getIntent();
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Auto_Time");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Mode/Auto_Time");
         ref.setValue(selectTime);
 
         timeON.setText(new StringBuilder().append(selectTime.hourStart).append(" : ").append(selectTime.minuteStart)
@@ -288,7 +300,9 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
         startActivity(intent);
     }
     public void openProfile (){
-        Intent intent= new Intent(this, Profile.class);
+        Intent intent = new Intent(this, Profile.class);
+        intent.putExtra("username",username);
+        intent.putExtra("password",password);
         startActivity(intent);
     }
     public void openLogin () {

@@ -1,18 +1,18 @@
 package com.example.hasnasmarthome;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
-import android.util.Pair;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +29,7 @@ public class Login extends AppCompatActivity {
     ImageView login;
     TextView logoText, sloganText;
     TextInputLayout username, password;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,12 @@ public class Login extends AppCompatActivity {
         });
 
         login_btn = (Button) findViewById(R.id.login_btn);
+
+        sp = getSharedPreferences("login",MODE_PRIVATE);
+
+        if(sp.getBoolean("logged",false)){
+            goToDasboard();
+        }
 
     }
 
@@ -111,12 +118,10 @@ public class Login extends AppCompatActivity {
                         username.setError(null);
                         username.setErrorEnabled(false);
                         String usernameFromDB = dataSnapshot.child(userEnteredUsername).child("username").getValue(String.class);
-
-                        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                        intent.putExtra("username", usernameFromDB);
-                        intent.putExtra("password", passwordFromDB);
-                        startActivity(intent);
-
+                        sp.edit().putBoolean("logged",true).apply();
+                        sp.edit().putString("username",usernameFromDB).apply();
+                        sp.edit().putString("password",passwordFromDB).apply();
+                        goToDasboard();
                     } else {
                         password.setError("Wrong Password");
                         password.requestFocus();
@@ -132,7 +137,15 @@ public class Login extends AppCompatActivity {
 
             }
         });
+    }
 
+    public void goToDasboard(){
+        Intent intent = new Intent(this, Dashboard.class);
+        intent.putExtra("username",sp.getString("username",""));
+        intent.putExtra("password",sp.getString("password",""));
+        Log.i("hehehe",sp.getString("username",""));
+
+        startActivity(intent);
     }
 }
 

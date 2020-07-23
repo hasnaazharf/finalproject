@@ -106,6 +106,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
+                openHome();
                 break;
 
             case R.id.nav_status:

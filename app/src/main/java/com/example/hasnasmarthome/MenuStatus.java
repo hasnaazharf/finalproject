@@ -27,6 +27,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MenuStatus extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,6 +44,11 @@ public class MenuStatus extends AppCompatActivity implements NavigationView.OnNa
     DrawerLayout drawerlayout;
     ImageView menu_nav;
 
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
+
+    String username, password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +56,19 @@ public class MenuStatus extends AppCompatActivity implements NavigationView.OnNa
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_menu_status);
 
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("users");
+
         //Menu Hooks
         drawerlayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         menu_nav = findViewById(R.id.icon_nav);
 
         navigationDrawer();
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
 
         webView = (WebView) findViewById(R.id.myWebView);
         progressBarWeb = (ProgressBar) findViewById(R.id.progressBar);
@@ -259,7 +273,9 @@ public class MenuStatus extends AppCompatActivity implements NavigationView.OnNa
         startActivity(intent);
     }
     public void openProfile (){
-        Intent intent= new Intent(this, Profile.class);
+        Intent intent = new Intent(this, Profile.class);
+        intent.putExtra("username",username);
+        intent.putExtra("password",password);
         startActivity(intent);
     }
     public void openLogin () {
