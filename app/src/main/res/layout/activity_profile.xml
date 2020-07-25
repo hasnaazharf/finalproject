@@ -37,23 +37,46 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PROFILE"
-            android:textColor="#E1EF3485"
-            android:textSize="50sp"
-            android:paddingTop="20dp"
-            android:textAlignment="center"
-            app:fontFamily="@font/bangers"/>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                app:srcCompat="@drawable/draw_user" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PROFILE USER"
+                android:textColor="#A9E91E63"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                android:paddingTop="130dp"
+                app:fontFamily="@font/bangers"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Monitoring and Controlling Your Lamp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:fontFamily="@font/amatic_sc_bold"
+                android:paddingTop="190dp"
+                tools:ignore="MissingConstraints" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:paddingTop="50dp"
-            android:paddingLeft="20dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:hint="Full Name"

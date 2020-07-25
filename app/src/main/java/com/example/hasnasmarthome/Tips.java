@@ -1,9 +1,9 @@
 package com.example.hasnasmarthome;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,26 +17,25 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MenuEnergy extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Tips extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     //Drawer Menu
     NavigationView navigationView;
     DrawerLayout drawerlayout;
     ImageView menu_nav;
 
+    Button callStatus, callChart, callControl, callEnergy;
+
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
-    String username, password, second;
-
-    Button button_low, button_mid, button_high;
+    String username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_menu_energy);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_tips);
 
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("users");
@@ -46,68 +45,47 @@ public class MenuEnergy extends AppCompatActivity implements NavigationView.OnNa
         navigationView = findViewById(R.id.navigation_view);
         menu_nav = findViewById(R.id.icon_nav);
 
-        button_low = findViewById(R.id.low);
-        button_mid = findViewById(R.id.moderate);
-        button_high = findViewById(R.id.high);
-
         navigationDrawer();
+
+        callStatus = (Button) findViewById(R.id.status_button);
+        callStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMenuStatus();
+            }
+        });
+
+        callChart = (Button) findViewById(R.id.chart_button);
+        callChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMenuChart();
+            }
+        });
+
+        callControl = (Button) findViewById(R.id.control_button);
+        callControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMenuControl();
+            }
+        });
+
+        callEnergy = (Button) findViewById(R.id.energy_button);
+        callEnergy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMenuEnergy();
+            }
+        });
+
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
 
-        button_low.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lowConsumption();
-            }
-        });
-
-        button_mid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moderateConsumption();
-            }
-        });
-
-        button_high.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                highConsumption();
-            }
-        });
-
     }
 
-    public void lowConsumption(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference seconds = database.getReference("Energy/Seconds");
-        seconds.setValue("28800");
-
-        Intent intent = new Intent(this, Consumption.class);
-        intent.putExtra("Energy/Seconds",second);
-        startActivity(intent);
-
-    }
-
-    public void moderateConsumption(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference seconds = database.getReference("Energy/Seconds");
-        seconds.setValue("50400");
-
-        Intent intent = new Intent(this, Consumption.class);
-        intent.putExtra("Energy/Seconds",second);
-        startActivity(intent);
-    }
-
-    public void highConsumption(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference seconds = database.getReference("Energy/Seconds");
-        seconds.setValue("72000");
-
-        Intent intent = new Intent(this, Consumption.class);
-        intent.putExtra("Energy/Seconds",second);
-        startActivity(intent);
-    }
+    //Navigation Item
 
     private void navigationDrawer() {
         navigationView.bringToFront();
@@ -188,15 +166,14 @@ public class MenuEnergy extends AppCompatActivity implements NavigationView.OnNa
         Intent intent= new Intent(this, MenuEnergy.class);
         startActivity(intent);
     }
-    public void openLogin () {
-        Intent intent= new Intent(this, Login.class);
-        startActivity(intent);
-    }
     public void openProfile (){
         Intent intent = new Intent(this, Profile.class);
         intent.putExtra("username",username);
         intent.putExtra("password",password);
         startActivity(intent);
     }
-
+    public void openLogin () {
+        Intent intent= new Intent(this, Login.class);
+        startActivity(intent);
+    }
 }

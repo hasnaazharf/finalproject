@@ -145,12 +145,12 @@ public class MenuControl extends AppCompatActivity implements NavigationView.OnN
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myref = database.getReference("Mode/Manual_Lamp_Status");
-                    myref.setValue("ON");
+                    DatabaseReference manual = database.getReference("Mode/Manual_Lamp_Status");
+                    manual.setValue("ON");
                 } else {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myref = database.getReference("Mode/Manual_Lamp_Status");
-                    myref.setValue("OFF");
+                    DatabaseReference manual = database.getReference("Mode/Manual_Lamp_Status");
+                    manual.setValue("OFF");
                 }
             }
         });

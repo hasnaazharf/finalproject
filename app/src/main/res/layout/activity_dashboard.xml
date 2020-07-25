@@ -230,7 +230,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="99dp"
                                 android:layout_marginTop="15dp"
-                                app:srcCompat="@drawable/about" />
+                                app:srcCompat="@drawable/draw_energy" />
 
                             <TextView
                                 android:id="@+id/energy_text"

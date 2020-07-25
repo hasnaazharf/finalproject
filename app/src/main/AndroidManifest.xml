@@ -6,17 +6,16 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity
-            android:name=".MenuChart"
-            android:label="@string/title_activity_menu_chart"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-        <activity android:name=".HttpGetRequest" />
+        <activity android:name=".Tips"></activity>
+        <activity android:name=".Consumption" />
+        <activity android:name=".MenuChart" />
         <activity android:name=".MenuEnergy" />
         <activity android:name=".MenuControl" />
         <activity android:name=".MenuStatus" />

@@ -9,4 +9,7 @@
     <color name="card_low">#FDC1DE</color>
     <color name="card_mid">#F178B3</color>
     <color name="card_high">#98004A</color>
+    <color name="low">#FDD37E</color>
+    <color name="mid">#E4713B</color>
+    <color name="high">#9A2D29</color>
 </resources>

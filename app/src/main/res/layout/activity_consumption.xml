@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF"
-    tools:context=".MenuEnergy"
+    tools:context=".Consumption"
     android:id="@+id/drawer_layout">
 
     <com.google.android.material.navigation.NavigationView
@@ -46,13 +46,13 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                app:srcCompat="@drawable/draw_energy" />
+                app:srcCompat="@drawable/draw_notice" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MENU ENERGY MANAGEMENT"
+                android:text="ENERGY USAGE NOTICE"
                 android:textColor="#A9E91E63"
                 android:textAlignment="center"
                 android:textSize="40sp"
@@ -73,8 +73,8 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/card_low"
+            android:layout_height="50dp"
+            app:cardBackgroundColor="@color/card_high"
             app:cardElevation="8dp"
             app:cardCornerRadius="20dp"
             android:layout_marginLeft="20dp"
@@ -84,158 +84,135 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/card_low"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="210dp"
-                android:layout_marginBottom="15dp"
-                android:src="@drawable/sad" />
+            android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/compare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LOW CONSUMPTION"
-                android:textSize="30sp"
-                android:fontFamily="@font/amatic_sc_bold"
-                android:textColor="@color/card_high"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="C L I C K"
-                android:fontFamily="@font/advent_pro_semibold"
-                android:textColor="@color/card_black"
-                android:textSize="20dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"/>
+                android:textColor="@color/low"
+                android:textSize="20sp"
+                android:text="Your Energy Consumption still under Limit"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/aubrey"
+                android:layout_marginTop="15dp"/>
 
         </RelativeLayout>
-
-            <Button
-                android:id="@+id/low"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@android:color/transparent"/>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/card_mid"
+            app:cardBackgroundColor="@color/card_low"
             app:cardElevation="8dp"
             app:cardCornerRadius="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp">
+            android:layout_margin="20dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@color/card_mid"
+                android:layout_height="330dp"
+                android:background="@color/card_low"
                 android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="YOUR TODAY CONSUMPTION"
+                    android:textSize="40sp"
+                    android:fontFamily="@font/amatic_sc_bold"
+                    android:textColor="@color/high"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/advent_pro_semibold"
+                    android:textColor="@color/card_black"
+                    android:textSize="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="80dp"
+                    android:text="You have been turning on the lights for"/>
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/card3"/>
+                    android:layout_marginTop="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="90dp"
+                    android:src="@drawable/card3" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/hoursDouble"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="M O D E R A T E
-                    C O N S U M P T I O N"
                     android:textAlignment="center"
-                    android:textSize="30sp"
-                    android:fontFamily="@font/amatic_sc_bold"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="135dp"/>
+                    android:fontFamily="@font/advent_pro_semibold"
+                    android:textColor="@color/card_black"
+                    android:textSize="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="100dp"
+                    android:text="hours today" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="C L I C K"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/advent_pro_semibold"
+                    android:textColor="@color/high"
+                    android:textSize="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="65dp"
+                    android:text="Energy Consumption Persentage"/>
+
+                <TextView
+                    android:id="@+id/persentage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="%"
                     android:textAlignment="center"
                     android:fontFamily="@font/advent_pro_semibold"
                     android:textColor="@color/card_high"
-                    android:textSize="20dp"
+                    android:textSize="40dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="20dp"/>
 
             </RelativeLayout>
-
-                <Button
-                    android:id="@+id/moderate"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@android:color/transparent"/>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             app:cardBackgroundColor="@color/card_high"
             app:cardElevation="8dp"
             app:cardCornerRadius="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@color/card_high"
-                android:layout_marginTop="10dp">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/high"/>
+                android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/consumptionkwh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="HIGH CONSUMPTION"
-                    android:textSize="30sp"
-                    android:fontFamily="@font/amatic_sc_bold"
-                    android:textColor="@color/Yellow"
-                    android:layout_marginTop="90dp"
-                    android:layout_marginLeft="170dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="C L I C K"
-                    android:fontFamily="@font/advent_pro_semibold"
-                    android:textColor="#FFF"
-                    android:textSize="20dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"/>
+                    android:textColor="@color/low"
+                    android:textSize="20sp"
+                    android:text="Your Limit is 10 kWh per Day"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/aubrey"
+                    android:layout_marginTop="15dp"/>
 
             </RelativeLayout>
-
-            <Button
-                android:id="@+id/high"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@android:color/transparent"/>
 
         </androidx.cardview.widget.CardView>
 
